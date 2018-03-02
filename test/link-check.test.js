@@ -4,6 +4,7 @@ const expect = require('expect.js');
 const http = require('http');
 const express = require('express');
 const linkCheck = require('../');
+const ms = require('ms');
 
 describe('link-check', function () {
 
@@ -117,7 +118,7 @@ describe('link-check', function () {
     });
 
     it('should timeout if there is no response', function (done) {
-        linkCheck(baseUrl + '/hang', { timeout: '100ms' }, function (err, result) {
+        linkCheck(baseUrl + '/hang', { timeout: ms('100ms') }, function (err, result) {
             expect(err).to.be(null);
             expect(result.link).to.be(baseUrl + '/hang');
             expect(result.status).to.be('dead');
